@@ -41,13 +41,17 @@ class Taobao:
         except Exception as e:
             print("解析出错")
             print(e)
+            self.message=True
         finally:
             self.driver.quit()
               
     def save(self):
-        with open("taobao.json","w",encoding="utf-8") as f:
-            f.write(json.dumps(self.text,ensure_ascii=False))
-            print("保存成功")
+        if self.message!=True:
+            with open("taobao.json","w",encoding="utf-8") as f:
+                f.write(json.dumps(self.text,ensure_ascii=False))
+                print("保存成功")
+        else:
+            print("出现错误，不能保存")
 
 if __name__=="__main__":
     start=Taobao("手机")
